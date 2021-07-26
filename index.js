@@ -22,7 +22,6 @@ function AJAX(url, method = "GET", data) {
         .catch(err => err)
 }
 
-
 // AJAX('https://oil-bottlenose-pigeon.glitch.me/movies' + "/2")
 // .then(data => console.log(data))
 //
@@ -38,7 +37,13 @@ function AJAX(url, method = "GET", data) {
 //     .then(data => console.log(data))
 //
 // AJAX(serverURL + "/21", "DELETE")
-//     .then(data => console.log(data))
+//      .then(data => console.log(data))
+
+//we deleted all the empty IDs
+// for(var i = 6; i <= 19; i++) {
+//     AJAX(serverURL + "/" + i, "DELETE")
+//         .then(data => console.log(data))
+// }
 
 function renderMovie(movie) {
     var html = '<div class="movie">';
@@ -51,8 +56,8 @@ function renderMovie(movie) {
     return html;
 }
 
-function displayMovie(movies) {
-    movieDisplay.innerHTML = renderMovies(AJAX);
+function displayMovie(method, data) {
+    movieDisplay.innerHTML = renderMovies(AJAX(serverURL, method));
 }
 
 function renderMovies(movies) {
@@ -64,3 +69,7 @@ function renderMovies(movies) {
 }
 
 var movieDisplay = document.getElementById('Movie-Display')
+
+displayMovie("GET");
+
+console.log(movieDisplay);
