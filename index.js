@@ -58,6 +58,7 @@ function renderMovie(movie) {
 
 function displayMovie(method, data) {
     AJAX(serverURL, method).then(function(movies) {
+        loading.toggleClass('d-none');
         movieDisplay.innerHTML += renderMovies(movies);
     });
 }
@@ -71,7 +72,8 @@ function renderMovies(movies) {
     return html;
 }
 
-var movieDisplay = document.getElementById('Movie-Display')
+var movieDisplay = document.getElementById('Movie-Display');
+const loading = $('#loading');
 
 displayMovie("GET");
 
