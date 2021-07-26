@@ -50,3 +50,17 @@ function renderMovie(movie) {
     html += '</div>';
     return html;
 }
+
+function displayMovie(movies) {
+    movieDisplay.innerHTML = renderMovies(AJAX);
+}
+
+function renderMovies(movies) {
+    var html = '';
+    for(var i = 0; i <= movies.length - 1; i++) {
+        html += renderMovie(movies[i]);
+    }
+    return html;
+}
+
+var movieDisplay = document.getElementById('Movie-Display')
