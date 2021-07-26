@@ -57,10 +57,13 @@ function renderMovie(movie) {
 }
 
 function displayMovie(method, data) {
-    movieDisplay.innerHTML = renderMovies(AJAX(serverURL, method));
+    AJAX(serverURL, method).then(function(movies) {
+        movieDisplay.innerHTML += renderMovies(movies);
+    });
 }
 
 function renderMovies(movies) {
+    console.log('should be movies array: ', movies);
     var html = '';
     for(var i = 0; i <= movies.length - 1; i++) {
         html += renderMovie(movies[i]);
