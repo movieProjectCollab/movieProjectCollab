@@ -1,5 +1,8 @@
 "use strict";
 
+$(document).ready(function() {
+
+
 const serverURL = 'https://oil-bottlenose-pigeon.glitch.me/movies';
 
 fetch('https://oil-bottlenose-pigeon.glitch.me/movies').then( response => {
@@ -60,6 +63,7 @@ function displayMovie(method, data) {
     AJAX(serverURL, method).then(function(movies) {
         loading.toggleClass('d-none');
         movieDisplay.innerHTML += renderMovies(movies);
+        addEventListeners();
     });
 }
 
@@ -77,4 +81,15 @@ const loading = $('#loading');
 
 displayMovie("GET");
 
-console.log(movieDisplay);
+function addEventListeners(){
+
+    $('#add_btn').click(function(event) {
+        event.preventDefault();
+        console.log('add movie button clicked');
+    });
+
+}
+
+
+
+});
