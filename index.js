@@ -61,7 +61,7 @@ $(document).ready(function () {
     function displayMovie(method, data) {
         AJAX(serverURL, method, data).then(function (movies) {
             loading.toggleClass('d-none');
-            movieDisplay.innerHTML += renderMovies(movies);
+            movieDisplay.innerHTML = renderMovies(movies);
             addEventListeners();
         });
     }
@@ -111,6 +111,7 @@ $(document).ready(function () {
                     "POST",
                     {"title": addTitle.val(), "rating": addRating.val()}
                 );
+                displayMovie("GET");
         });
 
     }
