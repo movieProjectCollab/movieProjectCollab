@@ -49,11 +49,13 @@ $(document).ready(function () {
 
     function renderMovie(movie) {
         var html = '<div class="movie">';
-        html += '<header>' + movie.title + '</header>';
-        if (movie.director !== undefined) html += '<p>' + movie.director + '</p>';
-        if (movie.genre !== undefined) html += '<p>' + movie.genre + '</p>';
+        html += '<header class="title">' + movie.title + '</header>';
+        if (movie.director !== undefined) html += '<p class="director">' + movie.director + '</p>';
+        if (movie.genre !== undefined) html += '<p class="genre">' + movie.genre + '</p>';
         if (movie.poster !== undefined) html += `<img src="${movie.poster}">`;
-        html += '<p>' + movie.rating + '</p>';
+        html += '<p class="rating">' + movie.rating + '</p>';
+        html += `<button id="edit-movie-id-${movie.id}" class="edit">Edit</button>`;
+        html += `<button id="delete-movie-id-${movie.id}" class="delete">Delete</button>`;
         html += '</div>';
         return html;
     }
@@ -86,7 +88,7 @@ $(document).ready(function () {
     displayMovie("GET");
 
     function addEventListeners() {
-        addTitle.change(function() {
+        addTitle.change(function () {
             console.log($(this).val());
             titleIsValid = $(this).val() !== '';
 
@@ -95,7 +97,7 @@ $(document).ready(function () {
             }
         });
 
-        addRating.change(function() {
+        addRating.change(function () {
             console.log($(this).val());
             ratingIsValid = $(this).val() !== '';
 
@@ -107,13 +109,44 @@ $(document).ready(function () {
         $('#add_btn').click(function (event) {
             event.preventDefault();
             console.log('add movie button clicked');
-                displayMovie(
-                    "POST",
-                    {"title": addTitle.val(), "rating": addRating.val()}
-                );
-                displayMovie("GET");
+            displayMovie(
+                "POST",
+                {"title": addTitle.val(), "rating": addRating.val()}
+            );
+            displayMovie("GET");
         });
 
+        $('.edit').click(function (event) {
+            const movie = {};
+
+            console.log($(this).parent().find('.title').val())
+
+            let editForm = `<h3>Edit a movie</h3>
+                <label for="edit-movie-title">Title</label>
+                <input id="edit-movie-title" type="text" value="${movie.title}">
+                <label for="edit-movie-rating">Rating</label>
+                <input id="edit-movie-rating" type="text">
+                <label for="edit-movie-year">Year</label>
+                <input id="edit-movie-year" type="text">
+                <label for="edit-movie-genre">Genre</label>
+                <input id="edit-movie-genre" type="text">
+                <label for="edit-movie-director">Director</label>
+                <input id="edit-movie-director" type="text">
+                <label for="edit-movie-plot">Plot</label>
+                <textarea id="edit-movie-plot" type="text"></textarea>
+                <label for="edit-movie-actors">Actors</label>
+                <input id="edit-movie-actors" type="text">
+                <button id="edit-btn" type="submit">Edit movie</button>`;
+
+            $('#edit-movie-form').html(editForm);
+        });
+
+        $('#edit-btn').click(function (event) {
+            event.preventDefault();
+            console.log('add movie button clicked');
+            AJAX(serverURL + '', "PATCH");
+            displayMovie("GET");
+        });
     }
 
 });
