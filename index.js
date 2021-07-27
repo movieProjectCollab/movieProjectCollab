@@ -117,21 +117,24 @@ $(document).ready(function () {
         });
 
         $('.edit').click(function (event) {
-            const movie = {};
-
-            console.log($(this).parent().find('.title').val())
+            const movie = {
+                title: $(this).parent().find('.title')[0].innerText,
+                director: $(this).parent().find('.director')[0].innerText,
+                genre: $(this).parent().find('.genre')[0].innerText,
+                rating: $(this).parent().find('.rating')[0].innerText
+            }
 
             let editForm = `<h3>Edit a movie</h3>
                 <label for="edit-movie-title">Title</label>
                 <input id="edit-movie-title" type="text" value="${movie.title}">
                 <label for="edit-movie-rating">Rating</label>
-                <input id="edit-movie-rating" type="text">
+                <input id="edit-movie-rating" type="text" value="${movie.rating}">
                 <label for="edit-movie-year">Year</label>
                 <input id="edit-movie-year" type="text">
                 <label for="edit-movie-genre">Genre</label>
-                <input id="edit-movie-genre" type="text">
+                <input id="edit-movie-genre" type="text" value="${movie.genre}">
                 <label for="edit-movie-director">Director</label>
-                <input id="edit-movie-director" type="text">
+                <input id="edit-movie-director" type="text" value="${movie.director}">
                 <label for="edit-movie-plot">Plot</label>
                 <textarea id="edit-movie-plot" type="text"></textarea>
                 <label for="edit-movie-actors">Actors</label>
