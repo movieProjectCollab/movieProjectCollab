@@ -48,14 +48,14 @@ $(document).ready(function () {
 // }
 
     function renderMovie(movie) {
-        var html = '<div class="movie">';
+        var html = '<div class="movie m-2 w-25">';
         html += '<header class="title">' + movie.title + '</header>';
         if (movie.director !== undefined) html += '<p class="director">' + movie.director + '</p>';
         if (movie.genre !== undefined) html += '<p class="genre">' + movie.genre + '</p>';
-        if (movie.poster !== undefined) html += `<img src="${movie.poster}">`;
+        if (movie.poster !== undefined) html += `<img src="${movie.poster}" class="img-fluid">`;
         html += '<p class="rating">' + movie.rating + '</p>';
-        html += `<button id="edit-movie-id-${movie.id}" class="edit">Edit</button>`;
-        html += `<button id="delete-movie-id-${movie.id}" class="delete">Delete</button>`;
+        html += `<button id="edit-movie-id-${movie.id}" class="edit btn btn-primary">Edit</button>`;
+        html += `<button id="delete-movie-id-${movie.id}" class="delete btn btn-primary">Delete</button>`;
         html += '</div>';
         return html;
     }
