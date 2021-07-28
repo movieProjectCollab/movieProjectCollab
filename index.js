@@ -117,11 +117,14 @@ $(document).ready(function () {
         });
 
         $('.edit').click(function (event) {
+            console.log($(this).parent().find('img')[0]);
             const movie = {
                 title: $(this).parent().find('.title')[0].innerText,
                 director: $(this).parent().find('.director')[0].innerText,
                 genre: $(this).parent().find('.genre')[0].innerText,
-                rating: $(this).parent().find('.rating')[0].innerText
+                rating: $(this).parent().find('.rating')[0].innerText,
+                // poster: $(this).parent().find('img')[0].
+                id: $(this)[0].id.slice(14)
             }
 
             let editForm = `<h3>Edit a movie</h3>
@@ -142,13 +145,24 @@ $(document).ready(function () {
                 <button id="edit-btn" type="submit">Edit movie</button>`;
 
             $('#edit-movie-form').html(editForm);
-        });
 
-        $('#edit-btn').click(function (event) {
-            event.preventDefault();
-            console.log('add movie button clicked');
-            AJAX(serverURL + '', "PATCH");
-            displayMovie("GET");
+            $('#edit-btn').click(function (event) {
+                event.preventDefault();
+                // console.log(movie.id);
+                // console.log('edit movie button clicked');
+                AJAX(serverURL + '/' + movie.id, "PATCH", {
+                    title: $('#edit-movie-title').val(),
+                    rating: $('#edit-movie-rating').val(),
+                    // poster: ,
+                    year: $('#edit-movie-year').val(),
+                    genre: $('#edit-movie-genre').val(),
+                    director: $('#edit-movie-director').val(),
+                    plot: $('#edit-movie-plot').val(),
+                    actors: $('#edit-movie-actors').val()
+                }).then(function() {
+                    displayMovie("GET");
+                });
+            });
         });
 
         $('.delete').click(function (event) {
