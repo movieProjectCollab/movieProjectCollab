@@ -13,22 +13,26 @@
 
 </head>
 <body>
-<div>
+<div class="container-fluid">
     <h1>Movie Project</h1>
-</div>
-<form id="movie-form">
-    <h3>Add a movie</h3>
-    <label for="movie-title">Title</label>
-    <input id="movie-title" type="text">
-    <label for="movie-rating">Rating</label>
-    <input id="movie-rating" type="text">
-    <button id="add_btn" type="submit" disabled>Add movie</button>
-</form>
-<form id="edit-movie-form">
-</form>
-<div id="Movie-Display">
-    <p id="loading">Loading</p>
+    <form id="movie-form">
+        <h3>Add a movie</h3>
+        <div class="form-group">
+            <label for="movie-title">Title</label>
+            <input id="movie-title" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label for="movie-rating">Rating</label>
+            <input id="movie-rating" class="form-control" type="text">
+        </div>
+        <button id="add_btn" type="submit" class="btn btn-primary" disabled>Add movie</button>
+    </form>
+    <form id="edit-movie-form">
+    </form>
+    <div id="Movie-Display">
+        <p id="loading">Loading</p>
 
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>

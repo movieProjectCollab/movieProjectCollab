@@ -128,21 +128,35 @@ $(document).ready(function () {
             }
 
             let editForm = `<h3>Edit a movie</h3>
-                <label for="edit-movie-title">Title</label>
-                <input id="edit-movie-title" type="text" value="${movie.title}">
-                <label for="edit-movie-rating">Rating</label>
-                <input id="edit-movie-rating" type="text" value="${movie.rating}">
-                <label for="edit-movie-year">Year</label>
-                <input id="edit-movie-year" type="text">
-                <label for="edit-movie-genre">Genre</label>
-                <input id="edit-movie-genre" type="text" value="${movie.genre}">
-                <label for="edit-movie-director">Director</label>
-                <input id="edit-movie-director" type="text" value="${movie.director}">
-                <label for="edit-movie-plot">Plot</label>
-                <textarea id="edit-movie-plot" type="text"></textarea>
-                <label for="edit-movie-actors">Actors</label>
-                <input id="edit-movie-actors" type="text">
-                <button id="edit-btn" type="submit">Edit movie</button>`;
+                <div class="form-group">
+                    <label for="edit-movie-title">Title</label>
+                    <input id="edit-movie-title" class="form-control" type="text" value="${movie.title}">
+                </div>
+                <div class="form-group">
+                    <label for="edit-movie-rating">Rating</label>
+                    <input id="edit-movie-rating" class="form-control" type="text" value="${movie.rating}">
+                </div>
+                <div class="form-group">
+                    <label for="edit-movie-year">Year</label>
+                    <input id="edit-movie-year" class="form-control" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="edit-movie-genre">Genre</label>
+                    <input id="edit-movie-genre" class="form-control" type="text" value="${movie.genre}">
+                </div>
+                <div class="form-group">
+                    <label for="edit-movie-director">Director</label>
+                    <input id="edit-movie-director" class="form-control" type="text" value="${movie.director}">
+                </div>
+                <div class="form-group">
+                    <label for="edit-movie-plot">Plot</label>
+                    <textarea id="edit-movie-plot" class="form-control" type="text"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-movie-actors">Actors</label>
+                    <input id="edit-movie-actors" class="form-control" type="text">
+                </div>
+                <button id="edit-btn" class="btn btn-primary" type="submit">Edit movie</button>`;
 
             $('#edit-movie-form').html(editForm);
 
