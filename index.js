@@ -150,6 +150,16 @@ $(document).ready(function () {
             AJAX(serverURL + '', "PATCH");
             displayMovie("GET");
         });
+
+        $('.delete').click(function (event) {
+            console.log($(this)[0].id);
+            let id = $(this)[0].id.slice(16);
+            console.log(id);
+            AJAX(serverURL + '/' + id, "DELETE")
+                .then(function () {
+                    displayMovie("GET")
+                })
+        })
     }
 
 });
