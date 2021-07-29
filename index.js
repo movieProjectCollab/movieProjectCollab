@@ -53,7 +53,8 @@ $(document).ready(function () {
         let poster = (movie.poster === undefined) ? '' : movie.poster;
 
         let html = `<div class="movie m-2 w-25">
-            <h4 class="title">${movie.title}<br><small>${year}</small></h4>
+            <h4 class="title">${movie.title}</h4>
+            <p class="year">${year}</p>
             <p class="director">${director}</p>
             <p class="genre">${genre}</p>
             <img src="${poster}" class="img-fluid">
@@ -121,13 +122,11 @@ $(document).ready(function () {
         });
 
         $('.edit').click(function (event) {
-            let director = $(this).parent().find('.director')[0].innerText;
-            let genre = $(this).parent().find('.genre')[0].innerText;
-
             const movie = {
                 title: $(this).parent().find('.title')[0].innerText,
-                director: director === undefined ? '' : director,
-                genre: genre === undefined ? '' : genre,
+                year: $(this).parent().find('.year')[0].innerText,
+                director: $(this).parent().find('.director')[0].innerText,
+                genre: $(this).parent().find('.genre')[0].innerText,
                 rating: $(this).parent().find('.rating')[0].innerText,
                 poster: $(this).parent().find('img')[0].src,
                 id: $(this)[0].id.slice(14)
@@ -164,7 +163,7 @@ $(document).ready(function () {
                 </div>
                 <button id="edit-btn" class="btn btn-primary" type="submit">Edit movie</button>`;
 
-            $('#edit-movie-form').html(editForm);
+            $('#edit-movie-form').html(editForm).toggleClass('d-none');
 
             $('#edit-btn').click(function (event) {
                 event.preventDefault();
