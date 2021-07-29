@@ -1,7 +1,6 @@
 "use strict";
 
 $(document).ready(function () {
-
     const serverURL = 'https://oil-bottlenose-pigeon.glitch.me/movies';
 
     fetch('https://oil-bottlenose-pigeon.glitch.me/movies').then(response => {
@@ -48,15 +47,20 @@ $(document).ready(function () {
 // }
 
     function renderMovie(movie) {
-        var html = '<div class="movie m-2 w-25">';
-        html += '<header class="title">' + movie.title + '</header>';
-        if (movie.director !== undefined) html += '<p class="director">' + movie.director + '</p>';
-        if (movie.genre !== undefined) html += '<p class="genre">' + movie.genre + '</p>';
-        if (movie.poster !== undefined) html += `<img src="${movie.poster}" class="img-fluid">`;
-        html += '<p class="rating">' + movie.rating + '</p>';
-        html += `<button id="edit-movie-id-${movie.id}" class="edit btn btn-primary">Edit</button>`;
-        html += `<button id="delete-movie-id-${movie.id}" class="delete btn btn-primary">Delete</button>`;
-        html += '</div>';
+        let director = (movie.director === undefined) ? '' : movie.director;
+        let year = (movie.year === undefined) ? '' : movie.year;
+        let genre = (movie.genre === undefined) ? '' : movie.genre;
+        let poster = (movie.poster === undefined) ? '' : movie.poster;
+
+        let html = `<div class="movie m-2 w-25">
+            <h4 class="title">${movie.title}<br><small>${year}</small></h4>
+            <p class="director">${director}</p>
+            <p class="genre">${genre}</p>
+            <img src="${poster}" class="img-fluid">
+            <p class="rating">${movie.rating}</p>
+            <button id="edit-movie-id-${movie.id}" class="edit btn btn-primary mr-2">Edit</button>
+            <button id="delete-movie-id-${movie.id}" class="delete btn btn-primary">Delete</button>
+            </div>`;
         return html;
     }
 
@@ -69,7 +73,7 @@ $(document).ready(function () {
     }
 
     function renderMovies(movies) {
-        console.log('should be movies array: ', movies);
+        // console.log('should be movies array: ', movies);
         var html = '';
         for (var i = 0; i <= movies.length - 1; i++) {
             html += renderMovie(movies[i]);
@@ -117,13 +121,15 @@ $(document).ready(function () {
         });
 
         $('.edit').click(function (event) {
-            console.log($(this).parent().find('img')[0]);
+            let director = $(this).parent().find('.director')[0].innerText;
+            let genre = $(this).parent().find('.genre')[0].innerText;
+
             const movie = {
                 title: $(this).parent().find('.title')[0].innerText,
-                director: $(this).parent().find('.director')[0].innerText,
-                genre: $(this).parent().find('.genre')[0].innerText,
+                director: director === undefined ? '' : director,
+                genre: genre === undefined ? '' : genre,
                 rating: $(this).parent().find('.rating')[0].innerText,
-                // poster: $(this).parent().find('img')[0].
+                poster: $(this).parent().find('img')[0].src,
                 id: $(this)[0].id.slice(14)
             }
 
@@ -167,13 +173,14 @@ $(document).ready(function () {
                 AJAX(serverURL + '/' + movie.id, "PATCH", {
                     title: $('#edit-movie-title').val(),
                     rating: $('#edit-movie-rating').val(),
-                    // poster: ,
+                    poster: movie.poster,
                     year: $('#edit-movie-year').val(),
                     genre: $('#edit-movie-genre').val(),
                     director: $('#edit-movie-director').val(),
                     plot: $('#edit-movie-plot').val(),
                     actors: $('#edit-movie-actors').val()
                 }).then(function() {
+                    $('#edit-movie-form').toggleClass('d-none');
                     displayMovie("GET");
                 });
             });
@@ -189,5 +196,4 @@ $(document).ready(function () {
                 })
         })
     }
-
 });
