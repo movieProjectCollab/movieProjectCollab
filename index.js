@@ -163,7 +163,7 @@ $(document).ready(function () {
                 </div>
                 <button id="edit-btn" class="btn btn-primary" type="submit">Edit movie</button>`;
 
-            $('#edit-movie-form').html(editForm).toggleClass('d-none');
+            $('#edit-movie-form').html(editForm);
 
             $('#edit-btn').click(function (event) {
                 event.preventDefault();
@@ -179,7 +179,7 @@ $(document).ready(function () {
                     plot: $('#edit-movie-plot').val(),
                     actors: $('#edit-movie-actors').val()
                 }).then(function() {
-                    $('#edit-movie-form').toggleClass('d-none');
+                    $('#edit-movie-form').html('');
                     displayMovie("GET");
                 });
             });
